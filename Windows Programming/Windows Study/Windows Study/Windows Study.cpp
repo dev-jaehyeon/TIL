@@ -7,7 +7,7 @@
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
-HINSTANCE hInst;                                // 현재 인스턴스입니다.
+HINSTANCE hInst;                                // 핸들 인스턴스, 윈도우즈 운영체제에서 실행되는 프로그램을 구별하기 위한 ID값
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 
@@ -19,7 +19,7 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
+                     _In_ LPWSTR    lpCmdLine,  //이게 Main()의 arg에 해당하는 것이란다.
                      _In_ int       nCmdShow)
 {
     //UNREFERENCED_PARAMETER(hPrevInstance);
@@ -49,6 +49,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     RegisterClassExW(&wcex);
 
+    //여기서부터 윈도우를 생성한다.    
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
@@ -59,16 +60,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
-
+    
     //HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINDOWSSTUDY));
 
     MSG msg;
 
     // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (GetMessage(&msg, nullptr, 0, 0)) //메시지를 큐에서 읽는 함수
     {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            TranslateMessage(&msg); //가상 키 메시지이면 아스키코드 형태의 메시지를 추가로 생성
+            DispatchMessage(&msg);  //변환된 메시지를 처리하는 함수
     }
 
     return (int) msg.wParam;
@@ -138,10 +139,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_COMMAND  - 애플리케이션 메뉴를 처리합니다.
 //  WM_PAINT    - 주 창을 그립니다.
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
-//
+//  //STUDY:
+//  여기서 사용자가 메시지를 처리한다.
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    //이것만 있으면 끝내기를 눌러도 아무런 작동을 하지 않는다.
+    //if (message == WM_DESTROY) PostQuitMessage(0);
+    //return DefWindowProc(hWnd, message, wParam, lParam);
+    
     switch (message)
     {
     case WM_COMMAND:
@@ -176,6 +182,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;
+    
 }
 
 // 정보 대화 상자의 메시지 처리기입니다.
