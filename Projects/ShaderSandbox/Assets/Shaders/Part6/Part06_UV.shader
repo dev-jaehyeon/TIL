@@ -3,6 +3,8 @@
     Properties
     {
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _UVx("UV.x에 더해질 부동소수점", float) = 0
+        _UVy("UV.y에 더해질 부동소수점", float) = 0
     }
     SubShader
     {
@@ -15,6 +17,8 @@
         #pragma target 3.0
 
         sampler2D _MainTex;
+        float _UVx;
+        float _UVy;
 
         struct Input
         {
@@ -26,7 +30,7 @@
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            fixed4 c = tex2D (_MainTex, float2(IN.uv_MainTex.x + _Time.y, IN.uv_MainTex.y + _Time.y));
+            fixed4 c = tex2D (_MainTex, float2(IN.uv_MainTex.x + _UVx, IN.uv_MainTex.y + _UVy));
             o.Albedo = c.rgb;
         }
         ENDCG
