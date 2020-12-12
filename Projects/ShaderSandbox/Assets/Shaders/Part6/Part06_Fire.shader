@@ -31,9 +31,10 @@
 
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
-            fixed4 c = tex2D (_MainTex, IN.uv_MainTex);
-            //uv에서 y축이 계속 움직임
             fixed4 d = tex2D(_MainTex2, float2(IN.uv_MainTex2.x, IN.uv_MainTex2.y -_Time.y));
+            d.rgb = d.rgb + 1;
+            fixed4 c = tex2D (_MainTex, IN.uv_MainTex + d.r);
+            //uv에서 y축이 계속 움직임
             o.Emission = c.rgb * d.rgb;
             o.Alpha = c.a * d.a;
         }

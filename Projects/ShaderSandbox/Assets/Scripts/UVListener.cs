@@ -15,7 +15,6 @@ public class UVListener : MonoBehaviour
         if (isMoving == false) return;
         float xdamp = mat.GetFloat("_uvx");
         float ydamp = mat.GetFloat("_uvy");
-        Debug.Log(xdamp + " " + ydamp);
         Vector3 myPos = new Vector3(xdamp * 2, ydamp * 2, 0);
         transform.localPosition = myPos;
     }
