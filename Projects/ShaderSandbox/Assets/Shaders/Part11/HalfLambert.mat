@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Part11_BasicCustomLight
-  m_Shader: {fileID: 4800000, guid: 4c6f125e545c9274198172a251efeba0, type: 3}
+  m_Name: HalfLambert
+  m_Shader: {fileID: 4800000, guid: b0a3e00278d2be44eae11f2dcbf26e28, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -68,7 +68,6 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _IsSatured: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
