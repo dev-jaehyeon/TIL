@@ -50,8 +50,8 @@
             v1.rgb = v1.rgb * IN.color.r;
             v2.rgb = v2.rgb * IN.color.g;
             v3.rgb = v3.rgb * IN.color.b;
-            o.Emission = c + v1 + v2 + v3;//밑에랑 같이 둘다 됨
-            //o.Emission = c.rgb + v1.rgb + v2.rgb + v3.rgb;
+            //o.Emission = c + v1 + v2 + v3;//밑에랑 같이 둘다 됨
+            o.Emission = c.rgb + v1.rgb + v2.rgb + v3.rgb;
             //o.Emission = (IN.color.r + IN.color.g + IN.color.b);
             o.Alpha = c.a;
         }
